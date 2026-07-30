@@ -47,6 +47,10 @@
   .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(58,141,255,.45); }
   .meta { margin-top: 16px; color: var(--faint); font-size: 14px; letter-spacing: .01em; }
   .meta b { color: var(--muted); font-weight: 600; }
+  .brew { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; max-width: calc(100% - 20px); }
+  .brew-cmd { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--muted);
+    background: rgba(0,0,0,.28); border: 1px solid var(--panel-brd); border-radius: 9px; padding: 9px 13px;
+    overflow-x: auto; white-space: nowrap; }
 
   /* sections */
   section { padding: 40px 0; }
@@ -182,6 +186,10 @@
       <p class="tagline">Keep every app on your Mac up to date — from one place.</p>
       <a class="cta" href="https://github.com/replikduplik/kegwatch-releases/releases/latest">⬇︎&nbsp; Download for macOS</a>
       <p class="meta"><b>Free</b> · macOS 15+ · Apple-notarized</p>
+      <div class="brew">
+        <code class="brew-cmd">brew install --cask replikduplik/tap/kegwatch</code>
+        <button class="cr-btn copy-btn" data-addr="brew install --cask replikduplik/tap/kegwatch">Copy</button>
+      </div>
     </header>
 
     <section>
