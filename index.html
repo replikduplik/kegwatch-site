@@ -103,6 +103,29 @@
   footer a { color: var(--muted); }
 
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .cta { transition: none; } }
+
+  /* donate toast */
+  .donate-toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(150%);
+    display: flex; align-items: center; gap: 10px; z-index: 50;
+    background: rgba(18,24,32,.92); border: 1px solid var(--panel-brd);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    color: var(--ink); padding: 11px 12px 11px 18px; border-radius: 999px;
+    box-shadow: 0 14px 44px rgba(0,0,0,.55); cursor: pointer;
+    font-size: 15px; max-width: calc(100vw - 28px); opacity: 0;
+    transition: transform .5s cubic-bezier(.2,.85,.25,1), opacity .5s ease;
+  }
+  .donate-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .donate-toast:hover { border-color: rgba(58,141,255,.45); }
+  .donate-toast .dt-text b { color: var(--accent); }
+  .donate-toast .dt-arrow { color: var(--accent); font-weight: 700; }
+  .donate-toast .dt-close {
+    background: rgba(255,255,255,.08); border: none; color: var(--muted);
+    width: 24px; height: 24px; border-radius: 50%; font-size: 15px; line-height: 1;
+    cursor: pointer; margin-left: 4px; flex: none; display: grid; place-items: center;
+  }
+  .donate-toast .dt-close:hover { background: rgba(255,255,255,.18); color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { .donate-toast { transition: opacity .35s ease; transform: translateX(-50%) translateY(0); } }
 </style>
 </head>
 <body>
@@ -146,7 +169,7 @@
       </div>
     </section>
 
-    <section class="support">
+    <section class="support" id="support">
       <h2>Support Kegwatch</h2>
       <div class="card">
         <p class="lead">Kegwatch is free. If it saved you some time, you can leave a tip. 🍺</p>
@@ -166,6 +189,13 @@
 
   </div>
 
+  <div class="donate-toast" id="donateToast" role="button" tabindex="0" aria-label="Support Kegwatch">
+    <span aria-hidden="true">🍺</span>
+    <span class="dt-text">Kegwatch is free — <b>support it</b></span>
+    <span class="dt-arrow" aria-hidden="true">→</span>
+    <button class="dt-close" id="donateClose" aria-label="Dismiss">×</button>
+  </div>
+
   <script>
     document.getElementById('copyBtn').addEventListener('click', function () {
       var addr = document.getElementById('btc').textContent.trim();
@@ -175,6 +205,25 @@
         setTimeout(function () { b.textContent = 'Copy'; }, 1500);
       });
     });
+
+    (function () {
+      var toast = document.getElementById('donateToast');
+      var closeBtn = document.getElementById('donateClose');
+      if (!toast || localStorage.getItem('kw_donate_dismissed') === '1') return;
+      function hide() { toast.classList.remove('show'); }
+      function goSupport() {
+        document.getElementById('support').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        hide();
+      }
+      toast.addEventListener('click', goSupport);
+      toast.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goSupport(); }
+      });
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation(); hide(); localStorage.setItem('kw_donate_dismissed', '1');
+      });
+      setTimeout(function () { toast.classList.add('show'); }, 3500);
+    })();
   </script>
 </body>
 </html>
