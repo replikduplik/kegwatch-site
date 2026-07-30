@@ -96,8 +96,17 @@
     border-radius: 9px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
   }
   .copy:hover { background: rgba(58,141,255,.24); }
-  .support .note { color: var(--faint); font-size: 12.5px; margin: 16px 0 0; }
-  .support .btc-label { color: var(--muted); font-size: 13px; margin: 0 0 6px; font-weight: 600; letter-spacing: .02em; }
+  .support .note { color: var(--faint); font-size: 12.5px; margin: 14px 0 0; }
+  .beer-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    background: var(--accent); color: #fff; font-size: 16px; font-weight: 650;
+    padding: 13px 30px; border-radius: 12px; box-shadow: 0 8px 26px rgba(58,141,255,.38);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .beer-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(58,141,255,.5); }
+  .support .pay-sub { color: var(--faint); font-size: 12.5px; margin: 10px 0 0; }
+  .crypto-divider { display: flex; align-items: center; gap: 12px; color: var(--faint); font-size: 12.5px; margin: 26px 0 18px; }
+  .crypto-divider::before, .crypto-divider::after { content: ""; flex: 1; height: 1px; background: var(--panel-brd); }
 
   footer { text-align: center; padding: 50px 0 60px; color: var(--faint); font-size: 14px; border-top: 1px solid var(--panel-brd); margin-top: 30px; }
   footer a { color: var(--muted); }
@@ -173,13 +182,15 @@
       <h2>Buy me a beer 🍺</h2>
       <div class="card">
         <p class="lead">Kegwatch is free and always will be. If it saved you some time, a beer helps keep it brewing.</p>
-        <p class="btc-label">Bitcoin (BTC · Bitcoin network only)</p>
+        <a class="beer-cta" href="https://kegwatch.lemonsqueezy.com/checkout/buy/d8fa6a38-e11a-4e60-ae72-562c80fbc4b7" target="_blank" rel="noopener">🍺&nbsp; Buy me a beer</a>
+        <p class="pay-sub">Card · Apple&nbsp;Pay · secure checkout</p>
+        <div class="crypto-divider"><span>or send Bitcoin</span></div>
         <div class="qr"><img src="assets/btc-qr.svg" alt="Bitcoin donation QR"></div>
         <div class="addr-row">
           <span class="addr" id="btc">bc1q75jj7qfaq98zxuvsg0syjkgv260pchvpmawcs9</span>
           <button class="copy" id="copyBtn">Copy</button>
         </div>
-        <p class="note">Fiat options (card / Apple&nbsp;Pay) coming soon.</p>
+        <p class="note">BTC · Bitcoin network only.</p>
       </div>
     </section>
 
